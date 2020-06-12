@@ -37,7 +37,7 @@ from lib.EasySSL import EasySSL
 from lib.colorama import Fore, Style
 
 class Desyncr():
-	def __init__(self, configfile, smhost, smport=443, url="", method="GET", endpoint="/",  SSLFlag=False, logh=None, smargs=None):
+	def __init__(self, configfile, smhost, smport=443, url="", method="POST", endpoint="/",  SSLFlag=False, logh=None, smargs=None):
 		self._configfile = configfile
 		self._host = smhost
 		self._port = smport
@@ -382,15 +382,14 @@ if __name__ == "__main__":
 
 	Parser = argparse.ArgumentParser()
 	Parser.add_argument('-u', '--url', help="Target URL with Endpoint")
-	Parser.add_argument('-c', action="store_true",help="")
 	Parser.add_argument('-v', '--vhost', default="", help="Specify a virtual host")
 	Parser.add_argument('-x', '--exit_early', action='store_true',help="Exit scan on first finding")
-	Parser.add_argument('-m', '--method', default="GET", help="HTTP method to use (e.g GET, POST) Default: GET")
+	Parser.add_argument('-m', '--method', default="POST", help="HTTP method to use (e.g GET, POST) Default: POST")
 	Parser.add_argument('-l', '--log', help="Specify a log file")
 	Parser.add_argument('-q', '--quiet', action='store_true', help="Quiet mode will only log issues found")
 	Parser.add_argument('-t', '--timeout', default=5.0, help="Socket timeout value Default: 5")
 	Parser.add_argument('--no-color', action='store_true', help="Suppress color codes")
-	Parser.add_argument('--configfile', default="default.py", help="Filepath to the configuration file of payloads")
+	Parser.add_argument('-c', '--configfile', default="default.py", help="Filepath to the configuration file of payloads")
 	Args = Parser.parse_args()  # returns data from the options specified (echo)
 
 	NOCOLOR = Args.no_color
