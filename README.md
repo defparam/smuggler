@@ -21,7 +21,7 @@ A special thanks to [James Kettle](https://skeletonscribe.net/) for his [researc
 And a special thanks to [Ben Sadeghipour](https://www.nahamsec.com/) for beta testing Smuggler and for allowing me to discuss my work at [Nahamcon 2020](https://nahamcon.com)
 
 ## IMPORTANT
-This tool does not guarentee no false-positives or false-negatives. Just because a mutation may report OK does not mean there isn't a desync issue, but more importantly just because the tool indicates a potential desync issue does not mean there definitely exists one. The script may encounter request processors from large entities (i.e. Google/AWS/Yahoo/Akamai/etc..) that may show false positive results.
+This tool does not guarantee no false-positives or false-negatives. Just because a mutation may report OK does not mean there isn't a desync issue, but more importantly just because the tool indicates a potential desync issue does not mean there definitely exists one. The script may encounter request processors from large entities (i.e. Google/AWS/Yahoo/Akamai/etc..) that may show false positive results.
 
 ## Installation
 
@@ -65,8 +65,8 @@ optional arguments:
 ```
 
 Smuggler at a minimum requires either a URL via the -u/--url argument or a list of URLs piped into the script via stdin.
-If the URL specifies `https://` then Smuggler will connect to the host:port using TLS. If the URL specifies `http://`
-then no SSL/TLS will be used at all. If only the host is specified then the script will default to `https://`
+If the URL specifies `https://` then Smuggler will connect to the host:port using SSL/TLS. If the URL specifies `http://`
+then no SSL/TLS will be used at all. If only the host is specified, then the script will default to `https://`
 
 Use -v/--vhost \<host> to specify a different host header from the server address
 
@@ -80,7 +80,7 @@ Use -q/--quiet reduce verbosity and only log issues found
 
 Use -t/--timeout \<value> to specify the socket timeout. The value should be high enough to conclude that the socket is hanging, but low enough to speed up testing (default: 5)
 
-Use --no-color to supress the output color codes printed to stdout (logs by default don't include color codes)
+Use --no-color to suppress the output color codes printed to stdout (logs by default don't include color codes)
 
 Use -c/--configfile \<configfile> to specify your smuggler mutation configuration file (default: default.py)
 
