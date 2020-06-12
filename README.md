@@ -33,7 +33,7 @@ This tool does not guarentee no false-positives or false-negatives. Just because
 
 Single Host:
 ```
-python3 smuggler.py -u \<URL>
+python3 smuggler.py -u <URL>
 ```
 
 List of hosts:
