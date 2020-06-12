@@ -14,6 +14,12 @@
 
 An HTTP Request Smuggling / Desync testing tool written in Python 3
 
+# Acknowledgements
+
+A special thanks to [James Kettle](https://skeletonscribe.net/) for his [research and methods into HTTP desyncs](https://portswigger.net/research/http-desync-attacks-request-smuggling-reborn)
+
+And a special thanks to [Ben Sadeghipour](https://www.nahamsec.com/) for beta testing Smuggler and allowing me to discuss my work at Nahamcon 2020
+
 ## Installation
 
 1) git clone https://github.com/defparam/smuggler.git
