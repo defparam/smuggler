@@ -203,7 +203,7 @@ class Desyncr():
 			sys.stdout.write("\r"+" "*100+"\r")
 			msg = Style.BRIGHT + Fore.MAGENTA + "[%s]%s: %s" % \
 			(Fore.CYAN + name + Fore.MAGENTA, " "*(spacing-len(name)), dismsg)
-			sys.stdout.write(CF(msg))
+			sys.stdout.write(CF(msg + Style.RESET_ALL))
 			sys.stdout.flush()
 
 			if dismsg[-1] == "\n":
