@@ -108,17 +108,17 @@ mutations["tabprefix1"] = render_template("Transfer-Encoding:\tchunked")
 mutations["tabprefix2"] = render_template("Transfer-Encoding\t:\tchunked")
 mutations["space1"] = render_template("Transfer-Encoding : chunked")
 
-for i in [0x1,0x4,0x8,0x9,0xa,0xb,0xc,0xd,0x1F,0x20,0x7f,0xA0,0xFF]:
-	mutations["midspace-%02x"%i] = render_template("Transfer-Encoding:%cchunked"%(i))
-	mutations["postspace-%02x"%i] = render_template("Transfer-Encoding%c: chunked"%(i))
-	mutations["prespace-%02x"%i] = render_template("%cTransfer-Encoding: chunked"%(i))
-	mutations["endspace-%02x"%i] = render_template("Transfer-Encoding: chunked%c"%(i))
-	mutations["xprespace-%02x"%i] = render_template("X: X%cTransfer-Encoding: chunked"%(i))
-	mutations["endspacex-%02x"%i] = render_template("Transfer-Encoding: chunked%cX: X"%(i))
-	mutations["rxprespace-%02x"%i] = render_template("X: X\r%cTransfer-Encoding: chunked"%(i))
-	mutations["xnprespace-%02x"%i] = render_template("X: X%c\nTransfer-Encoding: chunked"%(i))
-	mutations["endspacerx-%02x"%i] = render_template("Transfer-Encoding: chunked\r%cX: X"%(i))
-	mutations["endspacexn-%02x"%i] = render_template("Transfer-Encoding: chunked%c\nX: X"%(i))
+for i in [0x1, 0x4, 0x8, 0x9, 0xa, 0xb, 0xc, 0xd, 0x1F, 0x20, 0x7f, 0xA0, 0xFF]:
+    mutations["midspace-%02x" % i] = render_template("Transfer-Encoding:%cchunked" % i)
+    mutations["postspace-%02x" % i] = render_template("Transfer-Encoding%c: chunked" % i)
+    mutations["prespace-%02x" % i] = render_template("%cTransfer-Encoding: chunked" % i)
+    mutations["endspace-%02x" % i] = render_template("Transfer-Encoding: chunked%c" % i)
+    mutations["xprespace-%02x" % i] = render_template("X: X%cTransfer-Encoding: chunked" % i)
+    mutations["endspacex-%02x" % i] = render_template("Transfer-Encoding: chunked%cX: X" % i)
+    mutations["rxprespace-%02x" % i] = render_template("X: X\r%cTransfer-Encoding: chunked" % i)
+    mutations["xnprespace-%02x" % i] = render_template("X: X%c\nTransfer-Encoding: chunked" % i)
+    mutations["endspacerx-%02x" % i] = render_template("Transfer-Encoding: chunked\r%cX: X" % i)
+    mutations["endspacexn-%02x" % i] = render_template("Transfer-Encoding: chunked%c\nX: X" % i)
 ```
 
 There are no input arguments yet on specifying your own customer headers and user-agents. It is recommended to create your own configuration file based on default.py and modify it to your liking.

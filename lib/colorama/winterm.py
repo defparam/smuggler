@@ -2,6 +2,7 @@
 from . import win32
 
 
+# @formatter:off
 # from wincon.h
 class WinColor(object):
     BLACK   = 0
@@ -15,9 +16,11 @@ class WinColor(object):
 
 # from wincon.h
 class WinStyle(object):
-    NORMAL              = 0x00 # dim text, dim background
-    BRIGHT              = 0x08 # bright text, dim background
-    BRIGHT_BACKGROUND   = 0x80 # dim text, bright background
+    NORMAL              = 0x00  # dim text, dim background
+    BRIGHT              = 0x08  # bright text, dim background
+    BRIGHT_BACKGROUND   = 0x80  # dim text, bright background
+# @formatter:on
+
 
 class WinTerm(object):
 
