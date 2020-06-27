@@ -9,6 +9,7 @@ from .utils import pycharm, replace_by, replace_original_by, StreamTTY, StreamNo
 def is_a_tty(stream):
     return StreamWrapper(stream, None).isatty()
 
+
 class IsattyTest(TestCase):
 
     def test_TTY(self):

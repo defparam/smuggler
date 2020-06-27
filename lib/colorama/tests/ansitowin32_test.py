@@ -13,7 +13,7 @@ class StreamWrapperTest(TestCase):
     def testIsAProxy(self):
         mockStream = Mock()
         wrapper = StreamWrapper(mockStream, None)
-        self.assertTrue( wrapper.random_attr is mockStream.random_attr )
+        self.assertTrue(wrapper.random_attr is mockStream.random_attr)
 
     def testDelegatesWrite(self):
         mockStream = Mock()
@@ -105,8 +105,8 @@ class AnsiToWin32Test(TestCase):
 
     def testWriteAndConvertWritesPlainText(self):
         stream = AnsiToWin32(Mock())
-        stream.write_and_convert( 'abc' )
-        self.assertEqual( stream.wrapped.write.call_args, (('abc',), {}) )
+        stream.write_and_convert('abc')
+        self.assertEqual(stream.wrapped.write.call_args, (('abc',), {}))
 
     def testWriteAndConvertStripsAllValidAnsi(self):
         stream = AnsiToWin32(Mock())
@@ -128,17 +128,17 @@ class AnsiToWin32Test(TestCase):
         ]
         for datum in data:
             stream.wrapped.write.reset_mock()
-            stream.write_and_convert( datum )
+            stream.write_and_convert(datum)
             self.assertEqual(
-               [args[0] for args in stream.wrapped.write.call_args_list],
-               [ ('abc',), ('def',) ]
+                [args[0] for args in stream.wrapped.write.call_args_list],
+                [('abc',), ('def',)]
             )
 
     def testWriteAndConvertSkipsEmptySnippets(self):
         stream = AnsiToWin32(Mock())
         stream.call_win32 = Mock()
-        stream.write_and_convert( '\033[40m\033[41m' )
-        self.assertFalse( stream.wrapped.write.called )
+        stream.write_and_convert('\033[40m\033[41m')
+        self.assertFalse(stream.wrapped.write.called)
 
     def testWriteAndConvertCallsWin32WithParamsAndCommand(self):
         stream = AnsiToWin32(Mock())
@@ -146,16 +146,16 @@ class AnsiToWin32Test(TestCase):
         stream.call_win32 = Mock()
         stream.extract_params = Mock(return_value='params')
         data = {
-            'abc\033[adef':         ('a', 'params'),
-            'abc\033[;;bdef':       ('b', 'params'),
-            'abc\033[0cdef':        ('c', 'params'),
-            'abc\033[;;0;;Gdef':    ('G', 'params'),
+            'abc\033[adef': ('a', 'params'),
+            'abc\033[;;bdef': ('b', 'params'),
+            'abc\033[0cdef': ('c', 'params'),
+            'abc\033[;;0;;Gdef': ('G', 'params'),
             'abc\033[1;20;128Hdef': ('H', 'params'),
         }
         for datum, expected in data.items():
             stream.call_win32.reset_mock()
-            stream.write_and_convert( datum )
-            self.assertEqual( stream.call_win32.call_args[0], expected )
+            stream.write_and_convert(datum)
+            self.assertEqual(stream.call_win32.call_args[0], expected)
 
     def test_reset_all_shouldnt_raise_on_closed_orig_stdout(self):
         stream = StringIO()
@@ -179,12 +179,12 @@ class AnsiToWin32Test(TestCase):
     def testExtractParams(self):
         stream = AnsiToWin32(Mock())
         data = {
-            '':               (0,),
-            ';;':             (0,),
-            '2':              (2,),
-            ';;002;;':        (2,),
-            '0;1':            (0, 1),
-            ';;003;;456;;':   (3, 456),
+            '': (0,),
+            ';;': (0,),
+            '2': (2,),
+            ';;002;;': (2,),
+            '0;1': (0, 1),
+            ';;003;;456;;': (3, 456),
             '11;22;33;44;55': (11, 22, 33, 44, 55),
         }
         for datum, expected in data.items():
@@ -201,7 +201,7 @@ class AnsiToWin32Test(TestCase):
         stream.call_win32('m', (3, 1, 99, 2))
         self.assertEqual(
             [a[0][0] for a in listener.call_args_list],
-            [33, 11, 22] )
+            [33, 11, 22])
 
 
 if __name__ == '__main__':
