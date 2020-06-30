@@ -131,7 +131,12 @@ class Desyncr():
 			return
 			
 		if (self._configfile[1] != '/'):
-			self._configfile = os.path.dirname(os.path.abspath(__file__)) + "/configs/" + self._configfile
+			abspath = os.path.abspath(__file__)
+			if (os.path.islink(abspath)):
+				curpath = os.path.dirname(os.readlink(abspath))
+			else:
+				curpath = os.path.dirname(os.path.abspath(__file__))
+			self._configfile = curpath + "/configs/" + self._configfile
 
 		try:
 			f = open(self._configfile)
