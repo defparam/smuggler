@@ -131,12 +131,7 @@ class Desyncr():
 			return
 			
 		if (self._configfile[1] != '/'):
-			abspath = os.path.abspath(__file__)
-			if (os.path.islink(abspath)):
-				curpath = os.path.dirname(os.readlink(abspath))
-			else:
-				curpath = os.path.dirname(os.path.abspath(__file__))
-			self._configfile = curpath + "/configs/" + self._configfile
+			self._configfile = os.path.dirname(os.path.realpath(__file__)) + "/configs/" + self._configfile
 
 		try:
 			f = open(self._configfile)
@@ -229,7 +224,7 @@ class Desyncr():
 				_me = os.readlink(sys.argv[0])
 			else:
 				_me = sys.argv[0]
-			fname = os.path.abspath(os.path.dirname(_me)) + "/payloads/%s_%s_%s.txt" % (furl,ptype,name)
+			fname = os.path.realpath(os.path.dirname(_me)) + "/payloads/%s_%s_%s.txt" % (furl,ptype,name)
 			pretty_print("CRITICAL", "%s Payload: %s URL: %s\n" % \
 			(Fore.MAGENTA+ptype, Fore.CYAN+fname+Fore.MAGENTA, Fore.CYAN+self._url))
 			with open(fname, 'wb') as file:
