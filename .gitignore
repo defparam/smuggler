@@ -149,3 +149,6 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+# Smuggler results
+payloads/*.txt
