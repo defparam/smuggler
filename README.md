@@ -68,6 +68,8 @@ Smuggler at a minimum requires either a URL via the -u/--url argument or a list 
 If the URL specifies `https://` then Smuggler will connect to the host:port using SSL/TLS. If the URL specifies `http://`
 then no SSL/TLS will be used at all. If only the host is specified, then the script will default to `https://`
 
+Use -u/--url to provide a single URL. (<-- only 1 url not multiples)
+
 Use -v/--vhost \<host> to specify a different host header from the server address
 
 Use -x/--exit_early to exit the scan of a given server when a potential issue is found. In piped mode smuggler will just continue to the next host on the list
