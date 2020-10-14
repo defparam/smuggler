@@ -130,7 +130,7 @@ class Desyncr():
 		if not self._get_cookies():
 			return
 			
-		if (self._configfile[1] != '/'):
+		if not os.path.exists(self._configfile):
 			self._configfile = os.path.dirname(os.path.realpath(__file__)) + "/configs/" + self._configfile
 
 		try:
