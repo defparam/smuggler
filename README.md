@@ -55,6 +55,8 @@ optional arguments:
   -x, --exit_early      Exit scan on first finding
   -m METHOD, --method METHOD
                         HTTP method to use (e.g GET, POST) Default: POST
+  -e ENDPOINT, --endpoint ENDPOINT
+                        Add a endpoint to the end of the input url					
   -l LOG, --log LOG     Specify a log file
   -q, --quiet           Quiet mode will only log issues found
   -t TIMEOUT, --timeout TIMEOUT
