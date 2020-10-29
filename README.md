@@ -76,6 +76,8 @@ Use -x/--exit_early to exit the scan of a given server when a potential issue is
 
 Use -m/--method \<method> to specify a different HTTP verb from POST (i.e GET/PUT/PATCH/OPTIONS/CONNECT/TRACE/DELETE/HEAD/etc...)
 
+Use -e/--endpoint \<endpoint> to append a endpoint to the end of the input url
+
 Use -l/--log \<file> to write output to file as well as stdout
 
 Use -q/--quiet reduce verbosity and only log issues found
