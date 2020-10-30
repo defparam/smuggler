@@ -385,6 +385,7 @@ if __name__ == "__main__":
 	Parser.add_argument('-v', '--vhost', default="", help="Specify a virtual host")
 	Parser.add_argument('-x', '--exit_early', action='store_true',help="Exit scan on first finding")
 	Parser.add_argument('-m', '--method', default="POST", help="HTTP method to use (e.g GET, POST) Default: POST")
+	Parser.add_argument('-e', '--endpoint', help="Add a endpoint to the end of the input url")
 	Parser.add_argument('-l', '--log', help="Specify a log file")
 	Parser.add_argument('-q', '--quiet', action='store_true', help="Quiet mode will only log issues found")
 	Parser.add_argument('-t', '--timeout', default=5.0, help="Socket timeout value Default: 5")
@@ -438,10 +439,17 @@ if __name__ == "__main__":
 			server[0] = "https://" + server[0]
 
 		params = process_uri(server[0])
+		if Args.endpoint != None:
+			if Args.endpoint[0] != "/":
+				endpoint = "/"+Args.endpoint
+			else:
+				endpoint = Args.endpoint
+		else:
+			endpoint = params[2]
+
 		method = server[1].upper()
 		host = params[0]
 		port = params[1]
-		endpoint = params[2]
 		SSLFlagval = params[3]
 		configfile = Args.configfile
 
