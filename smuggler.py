@@ -35,6 +35,7 @@ from datetime import datetime
 from lib.Payload import Payload, Chunked, EndChunk
 from lib.EasySSL import EasySSL
 from lib.colorama import Fore, Style
+from urllib.parse import urlparse
 
 class Desyncr():
 	def __init__(self, configfile, smhost, smport=443, url="", method="POST", endpoint="/",  SSLFlag=False, logh=None, smargs=None):
@@ -317,34 +318,22 @@ class Desyncr():
 		return False
 
 def process_uri(uri):
-	#remove shouldering white spaces and go lowercase
-	uri = uri.strip().lower()
+	u = urlparse(uri)
 
-	#if it starts with https:// then strip it
-	if ((len(uri) > 8) and (uri[0:8] == "https://")):
-		uri = uri[8:]
+	if u.scheme == "https":
 		ssl_flag = True
 		std_port = 443
-	elif ((len(uri) > 7) and (uri[0:7] == "http://")):
-		uri = uri[7:]
+	elif u.scheme == "http":
 		ssl_flag = False
 		std_port = 80
 	else:
 		print_info("Error malformed URL not supported: %s" % (Fore.CYAN + uri))
 		exit(1)
 
-	#check for any forward slashes and filter only domain portion
-	uri_tokenized = uri.split("/")
-	uri = uri_tokenized[0]
-	smendpoint = '/' + '/'.join(uri_tokenized[1:])
-
-	#check for any port designators
-	uri = uri.split(":")
-
-	if len(uri) > 1:
-		return (uri[0], int(uri[1]), smendpoint, ssl_flag)
-
-	return (uri[0], std_port, smendpoint, ssl_flag)
+	if u.port:
+		return (u.hostname, u.port, u.path, ssl_flag)
+	else:
+		return (u.hostname, std_port, u.path, ssl_flag)
 
 def CF(text):
 	global NOCOLOR
@@ -437,12 +426,9 @@ if __name__ == "__main__":
 		if server[0].lower().strip()[0:4] != "http":
 			server[0] = "https://" + server[0]
 
-		params = process_uri(server[0])
+
+		host, port, endpoint, SSLFlagval = process_uri(server[0])
 		method = server[1].upper()
-		host = params[0]
-		port = params[1]
-		endpoint = params[2]
-		SSLFlagval = params[3]
 		configfile = Args.configfile
 
 		print_info("URL        : %s"%(Fore.CYAN + server[0]), FileHandle)
