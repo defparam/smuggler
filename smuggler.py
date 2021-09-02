@@ -426,7 +426,8 @@ if __name__ == "__main__":
 		if server[0].lower().strip()[0:4] != "http":
 			server[0] = "https://" + server[0]
 
-
+		if endpoint == "":
+			endpoint = "/"
 		host, port, endpoint, SSLFlagval = process_uri(server[0])
 		method = server[1].upper()
 		configfile = Args.configfile
