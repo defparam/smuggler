@@ -1,18 +1,18 @@
 #!/usr/bin/python3
 # MIT License
-# 
+#
 # Copyright (c) 2020 Evan Custodio
-# 
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
 # to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 # copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
-# 
+#
 # The above copyright notice and this permission notice shall be included in all
 # copies or substantial portions of the Software.
-# 
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -78,14 +78,14 @@ class Desyncr():
 					res_filtered += chr(single)
 			res = res_filtered
 			#if '504' in res:
-			
+
 			#print("\n\n"+str(str(payload_obj)))
 			#print("\n\n"+res)
 			return (0, res, payload_obj) # Return code 0 if normal response returned
 		except Exception as exception_data:
 			#print(exception_data)
 			return (-1, None, payload_obj) # Return code -1 if some except occured
-		
+
 	def _get_cookies(self):
 		RN = "\r\n"
 		try:
@@ -127,10 +127,10 @@ class Desyncr():
 	def run(self):
 		RN = "\r\n"
 		mutations = {}
-		
+
 		if not self._get_cookies():
 			return
-			
+
 		if (self._configfile[1] != '/'):
 			self._configfile = os.path.dirname(os.path.realpath(__file__)) + "/configs/" + self._configfile
 
@@ -140,16 +140,16 @@ class Desyncr():
 			error = ((Fore.CYAN + "Cannot find config file"+ Fore.MAGENTA), self._logh)
 			print_info("Error      : %s" % (error[0]))
 			exit(1)
-			
+
 		script = f.read()
 		f.close()
-		
+
 		exec(script)
-			
+
 		for mutation_name in mutations.keys():
 			if self._create_exec_test(mutation_name, mutations[mutation_name]) and self._exit_early:
 				break
-		
+
 		if self._quiet:
 			sys.stdout.write("\r"+" "*100+"\r")
 
@@ -163,10 +163,10 @@ class Desyncr():
 			te_payload.host = self._vhost
 		te_payload.method = self._method
 		te_payload.endpoint = self._endpoint
-		
+
 		if len(self._cookies) > 0:
 			te_payload.header += "Cookie: " + ''.join(self._cookies) + "\r\n"
-		
+
 		if not ptype:
 			te_payload.cl = 6 # timeout val == 6, good value == 5
 		else:
@@ -185,10 +185,10 @@ class Desyncr():
 			te_payload.host = self._vhost
 		te_payload.method = self._method
 		te_payload.endpoint = self._endpoint
-		
+
 		if len(self._cookies) > 0:
 			te_payload.header += "Cookie: " + ''.join(self._cookies) + "\r\n"
-			
+
 		if not ptype:
 			te_payload.cl = 4 # timeout val == 4, good value == 11
 		else:
@@ -254,7 +254,7 @@ class Desyncr():
 				else:
 					dismsg = Fore.RED + "Potential CLTE Issue Found" + Fore.MAGENTA + " - " + Fore.CYAN + self._method + Fore.MAGENTA + " @ " + Fore.CYAN + ["http://","https://",][self.ssl_flag]+ self._host + self._endpoint + Fore.MAGENTA + " - " + Fore.CYAN + self._configfile.split('/')[-1] + "\n"
 					pretty_print(name, dismsg)
-					
+
 					# Write payload out to file
 					write_payload(self._host, clte_res[2], "CLTE")
 					self._attempts = 0
@@ -278,7 +278,7 @@ class Desyncr():
 					#print (tecl_res2[1])
 					dismsg = Fore.RED + "Potential TECL Issue Found" + Fore.MAGENTA + " - " + Fore.CYAN + self._method + Fore.MAGENTA + " @ " + Fore.CYAN + ["http://","https://",][self.ssl_flag]+ self._host + self._endpoint + Fore.MAGENTA + " - " + Fore.CYAN + self._configfile.split('/')[-1] + "\n"
 					pretty_print(name, dismsg)
-					
+
 					# Write payload out to file
 					write_payload(self._host, tecl_res[2], "TECL")
 					self._attempts = 0
@@ -313,7 +313,7 @@ class Desyncr():
 			# Disconnected
 			dismsg = Fore.YELLOW + "DISCONNECTED" + ["\n", ""][self._quiet]
 			pretty_print(name, dismsg)
-			
+
 		self._attempts = 0
 		return False
 
@@ -363,7 +363,7 @@ def print_info(msg, file_handle=None):
 	if file_handle is not None:
 		file_handle.write(plaintext+"\n")
 
-if __name__ == "__main__":
+def main():
 	global NOCOLOR
 	if sys.version_info < (3, 0):
 		print("Error: Smuggler requires Python 3.x")
@@ -443,3 +443,6 @@ if __name__ == "__main__":
 
 	if FileHandle is not None:
 		FileHandle.close()
+
+if __name__ == "__main__":
+    main()
